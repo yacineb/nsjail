@@ -17,3 +17,31 @@ Examples:
 ## Building the docker
 
 `docker build . -t nsjail`
+
+how to run stuff inside testing docker:
+
+`./run_interactive.sh`
+
+Then you can run examples:
+
+- `nsjail --chroot / --config  /sandbox.cfg -- python3 --version`
+- `nsjail --chroot / --config  /sandbox.cfg -- python3 /examples/hello.py`
+- `nsjail --chroot / --config  /sandbox.cfg -- /usr/bin/python3 -Su /examples/hello.py `
+
+## Sandbox permissoions
+
+### User
+
+- 👤 Username: nobody
+- 📝 Real Name: Unknown
+- 🆔 User ID: 65534
+- 👥 Group ID: 65534
+
+### Folders
+
+- R/W permissions on `/data` dir mount, which is actually isolated for each sandbox run. This directory is the default pwd
+- No home directory.
+
+## known issues
+
+- mount `/lib64` to be fixed
