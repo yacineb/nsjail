@@ -5,7 +5,6 @@ System Information Example: Display home directory, user, and CPU count
 
 import os
 import getpass
-import multiprocessing
 import platform
 
 def get_home_directory():

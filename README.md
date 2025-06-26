@@ -42,6 +42,11 @@ Then you can run examples:
 - R/W permissions on `/data` dir mount, which is actually isolated for each sandbox run. This directory is the default pwd
 - No home directory.
 
+### Network
+
+- Egress to internet is allowed
+- No local IP
+
 ## known issues
 
 - mount `/lib64` to be fixed
