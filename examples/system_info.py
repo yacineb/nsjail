@@ -58,6 +58,70 @@ def get_current_directory():
     except Exception as e:
         return {'error': str(e)}
 
+def get_ram_information():
+    """Get and return RAM information"""
+    try:
+        # Try to use psutil for cross-platform RAM info
+        try:
+            import psutil
+            memory = psutil.virtual_memory()
+            return {
+                'total': memory.total,
+                'available': memory.available,
+                'used': memory.used,
+                'percent': memory.percent,
+                'total_gb': round(memory.total / (1024**3), 2),
+                'available_gb': round(memory.available / (1024**3), 2),
+                'used_gb': round(memory.used / (1024**3), 2)
+            }
+        except ImportError:
+            # Fallback for systems without psutil
+            if platform.system() == "Linux":
+                # Read from /proc/meminfo on Linux
+                with open('/proc/meminfo', 'r') as f:
+                    lines = f.readlines()
+                    total = 0
+                    available = 0
+                    for line in lines:
+                        if line.startswith('MemTotal:'):
+                            total = int(line.split()[1]) * 1024  # Convert KB to bytes
+                        elif line.startswith('MemAvailable:'):
+                            available = int(line.split()[1]) * 1024  # Convert KB to bytes
+                            break
+                    used = total - available
+                    percent = (used / total) * 100 if total > 0 else 0
+                    return {
+                        'total': total,
+                        'available': available,
+                        'used': used,
+                        'percent': round(percent, 1),
+                        'total_gb': round(total / (1024**3), 2),
+                        'available_gb': round(available / (1024**3), 2),
+                        'used_gb': round(used / (1024**3), 2)
+                    }
+            elif platform.system() == "Darwin":  # macOS
+                # Use sysctl on macOS
+                import subprocess
+                result = subprocess.run(['sysctl', '-n', 'hw.memsize'], 
+                                      capture_output=True, text=True)
+                if result.returncode == 0:
+                    total = int(result.stdout.strip())
+                    # For macOS, we'll just show total RAM as available RAM is complex to get
+                    return {
+                        'total': total,
+                        'available': total,  # Approximation
+                        'used': 0,  # Not available without psutil
+                        'percent': 0,
+                        'total_gb': round(total / (1024**3), 2),
+                        'available_gb': round(total / (1024**3), 2),
+                        'used_gb': 0
+                    }
+            else:
+                # Generic fallback
+                return {'error': 'RAM information not available on this platform'}
+    except Exception as e:
+        return {'error': str(e)}
+
 def print_home_info(home_info):
     """Print home directory information"""
     print("🏠 Home Directory Information:")
@@ -99,6 +163,20 @@ def print_cpu_info(cpu_info):
     print(f"💻 Platform: {cpu_info['platform']}")
     print(f"🔧 Processor: {cpu_info['processor']}")
 
+def print_ram_info(ram_info):
+    """Print RAM information"""
+    print("\n💾 RAM Information:")
+    print("-" * 40)
+    
+    if 'error' in ram_info:
+        print(f"❌ Error: {ram_info['error']}")
+        return
+    
+    print(f"💾 Total RAM: {ram_info['total_gb']} GB ({ram_info['total']:,} bytes)")
+    print(f"✅ Available RAM: {ram_info['available_gb']} GB ({ram_info['available']:,} bytes)")
+    print(f"📊 Used RAM: {ram_info['used_gb']} GB ({ram_info['used']:,} bytes)")
+    print(f"📈 Usage: {ram_info['percent']}%")
+
 def print_current_dir_info(current_dir_info):
     """Print current working directory information"""
     print("\n📂 Current Working Directory:")
@@ -130,6 +208,10 @@ def main():
     # Get current working directory information
     current_dir_info = get_current_directory()
     print_current_dir_info(current_dir_info)
+    
+    # Get RAM information
+    ram_info = get_ram_information()
+    print_ram_info(ram_info)
     
     # Get CPU information
     cpu_info = get_cpu_information()
