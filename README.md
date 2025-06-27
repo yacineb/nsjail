@@ -65,13 +65,13 @@ list of inherited env vars from host:
 - "HF_HOME"
 - "HF_TOKEN"
 
-
 ## Limits
 
 - 2GB RAM
 - 8GB maximum file size
 - 8GB max size of data segment.
 - 1024 simultaneously open file descriptors
+- 100 processes running
 
 ## TBD
 
