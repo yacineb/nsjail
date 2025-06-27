@@ -1,0 +1,16 @@
+FROM nsjail
+
+ENV VENV_PATH=/opt/adaptive/venv
+
+# Install uv and create virtual environment
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -LsSf https://astral.sh/uv/install.sh | sh \
+    && export PATH="/root/.local/bin:$PATH" \
+    && uv venv /opt/adaptive/venv
+
+ENV PATH="/root/.local/bin:$VENV_PATH/bin:$PATH"
+
+# Activate virtual environment by default
+RUN echo 'source $VENV_PATH/bin/activate' >> /root/.bashrc

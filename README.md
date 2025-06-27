@@ -16,7 +16,11 @@ Examples:
 
 ## Building the docker
 
+Base image for nsjail
 `docker build . -t nsjail`
+
+Playground image
+`docker build -f Dockerfile.playground . -t playground`
 
 how to run stuff inside testing docker:
 
@@ -61,6 +65,12 @@ list of inherited env vars from host:
 - "HF_HOME"
 - "HF_TOKEN"
 
+
+## Limits
+
+- 1GB RAM
+- 8GB maximum file size
+- 8GB max size of data segment.
 
 ## TBD
 
