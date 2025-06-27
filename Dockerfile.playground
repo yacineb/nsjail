@@ -14,3 +14,4 @@ ENV PATH="/root/.local/bin:$VENV_PATH/bin:$PATH"
 
 # Activate virtual environment by default
 RUN echo 'source $VENV_PATH/bin/activate' >> /root/.bashrc
+RUN mkdir -p /lib64 && uv pip install --upgrade pip && uv pip install datasets
