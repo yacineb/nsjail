@@ -28,7 +28,7 @@ Then you can run examples:
 - `nsjail --chroot / --config  /sandbox.cfg -- python3 /examples/hello.py`
 - `nsjail --chroot / --config  /sandbox.cfg -- /usr/bin/python3 -Su /examples/hello.py `
 
-## Sandbox permissoions
+## Sandbox permissions
 
 ### System
 
@@ -45,13 +45,21 @@ This means the sandboxed Python code runs with minimal privileges
 ### Folders
 
 - R/W permissions on `/data` dir mount, which is actually isolated for each sandbox run. This directory is the default pwd and user's HOME dir.
-- /tmp dir with rw permissions
+- /tmp dir with rw permissions, it's mounted to 'tmpfs', lives in RAM. So basically it goes off after sandbox execution end and each sandbox has own isolated temp dir
 
 ### Network
 
 - Egress to internet is allowed
 - No local IP
 
+### Environment variables
+
+list of inherited env vars from host:
+
+- "WANDB_API_KEY"
+- "HF_DATASETS_CACHE"
+- "HF_HOME"
+- "HF_TOKEN"
 
 
 ## TBD
