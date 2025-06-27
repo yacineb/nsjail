@@ -44,8 +44,8 @@ This means the sandboxed Python code runs with minimal privileges
 
 ### Folders
 
-- R/W permissions on `/data` dir mount, which is actually isolated for each sandbox run. This directory is the default pwd
-- No home directory.
+- R/W permissions on `/data` dir mount, which is actually isolated for each sandbox run. This directory is the default pwd and user's HOME dir.
+- /tmp dir with rw permissions
 
 ### Network
 
