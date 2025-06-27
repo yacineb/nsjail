@@ -30,6 +30,11 @@ Then you can run examples:
 
 ## Sandbox permissoions
 
+### System
+
+**keep_caps: false** = Strip all capabilities from the sandboxed process
+This means the sandboxed Python code runs with minimal privileges
+
 ### User
 
 - 👤 Username: nobody
@@ -47,6 +52,11 @@ Then you can run examples:
 - Egress to internet is allowed
 - No local IP
 
-## known issues
 
-- mount `/lib64` to be fixed
+
+## TBD
+
+- handle lib64
+- harden network access policy:
+    - Only traffic to External Net
+    - And traffic to harmony ws endpoint.
