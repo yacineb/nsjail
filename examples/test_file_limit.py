@@ -13,6 +13,9 @@ from pathlib import Path
 def get_file_descriptor_limit():
     """Get the current file descriptor limit."""
     soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
+    soft -= 4
+    hard -= 4
+
     return soft, hard
 
 def count_open_file_descriptors():

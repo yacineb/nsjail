@@ -41,17 +41,17 @@ def test_memory_allocation():
     print("🚀 RAM Allocation Test")
     print("=" * 50)
     
-    # Test 1: Try to allocate 1GB (1024 MB)
-    print("\n📋 Test 1: Allocating 1GB of RAM")
+    # Test 1: Try to allocate 2GB (2048 MB)
+    print("\n📋 Test 1: Allocating 2GB of RAM")
     print("-" * 40)
     
     start_time = time.time()
-    memory_block_1gb = allocate_memory(1024)
+    memory_block_1gb = allocate_memory(2048)
     end_time = time.time()
     
     if memory_block_1gb:
         print(f"⏱️  Allocation time: {end_time - start_time:.2f} seconds")
-        print("🎉 1GB allocation successful! This exceeds the sandbox limit.")
+        print("🎉 2GB allocation successful! This exceeds the sandbox limit.")
         
         # Keep the memory allocated for a moment to demonstrate
         print("🔄 Holding memory for 3 seconds...")
@@ -63,7 +63,7 @@ def test_memory_allocation():
     else:
         print("✅ Sandbox memory limit working correctly!")
     
-    # Test 2: Try smaller allocations if 1GB fails
+    # Test 2: Try smaller allocations if 2GB fails
     if not memory_block_1gb:
         print("\n📋 Test 2: Testing smaller allocations")
         print("-" * 40)

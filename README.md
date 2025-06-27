@@ -68,9 +68,10 @@ list of inherited env vars from host:
 
 ## Limits
 
-- 1GB RAM
+- 2GB RAM
 - 8GB maximum file size
 - 8GB max size of data segment.
+- 1024 simultaneously open file descriptors
 
 ## TBD
 
