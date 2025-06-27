@@ -73,9 +73,20 @@ list of inherited env vars from host:
 - 1024 simultaneously open file descriptors
 - 100 processes running
 
+## Processes
+
+I actually chose to disable cgroup isolation, because it's already done by containers runtime (docker, containerd etc..).
+cgroup isolation requires host container to have elevated previleges.
+
+Actually this sandbox has much finer grained control over syscalls filtering which is much more powerful.
+
+- No process termination: The sandboxed process cannot kill other processes on the system
+- No signal injection: Cannot send arbitrary signals to other processes
+- Reduced attack surface: Eliminates potential vectors for process manipulation
+- Better isolation: Maintains the principle of least privilege
+
 ## TBD
 
-- handle lib64
 - harden network access policy:
     - Only traffic to External Net
     - And traffic to harmony ws endpoint.

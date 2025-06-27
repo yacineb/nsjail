@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RAM Allocation Test: Attempt to allocate 1GB of RAM
+RAM Allocation Test: Attempt to allocate 2GB of RAM
 This program tests the memory limitations set in the sandbox configuration.
 """
 
