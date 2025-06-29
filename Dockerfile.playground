@@ -1,4 +1,15 @@
-FROM nsjail
+FROM ubuntu:noble AS base
+
+COPY --from=nsjail /bin/nsjail /bin
+
+# runtime dependencies
+RUN apt-get -y update && apt-get install -y \
+    libc6 \
+    libstdc++6 \
+    libprotobuf32 \
+    libnl-route-3-200 \
+    python3 \
+    python3-pip
 
 ENV VENV_PATH=/opt/adaptive/venv
 

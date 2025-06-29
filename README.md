@@ -33,7 +33,7 @@ Then you can run examples:
 
 - `nsjail --chroot / --config  /sandbox.cfg -- python3 --version`
 - `nsjail --chroot / --config  /sandbox.cfg -- python3 /examples/hello.py`
-- `nsjail --chroot / --config  /sandbox.cfg -- /usr/bin/python3 -Su /examples/hello.py `
+- `nsjail --chroot / --config  /sandbox.cfg -- /usr/bin/python3 -Su /examples/hello.py`
 
 ## Sandbox permissions
 

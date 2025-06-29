@@ -5,9 +5,7 @@ RUN apt-get -y update && apt-get install -y \
     libc6 \
     libstdc++6 \
     libprotobuf32 \
-    libnl-route-3-200 \
-    python3 \
-    python3-pip
+    libnl-route-3-200
 
 FROM base AS build
 ARG NSJAIL_VERSION=3.4
