@@ -1,0 +1,16 @@
+DEFAULT ALLOW
+
+KILL {
+    init_module, finit_module, delete_module,
+    reboot, shutdown,
+    perf_event_open,
+    bpf,
+    add_key, request_key, keyctl,
+    swapon, swapoff,
+    settimeofday, adjtimex, clock_settime,
+    quotactl,
+    syslog, sysinfo,
+    mount,
+    ptrace,
+    capget, capset
+}

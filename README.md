@@ -28,6 +28,9 @@ how to run stuff inside testing docker:
 
 Then you can run examples:
 
+- With secomp filtering
+`nsjail --chroot / -P /policy.kafel --config  /sandbox.cfg -- /opt/adaptive/venv/bin/python /examples/test_process_killing.py`
+
 - `nsjail --chroot / --config  /sandbox.cfg -- python3 --version`
 - `nsjail --chroot / --config  /sandbox.cfg -- python3 /examples/hello.py`
 - `nsjail --chroot / --config  /sandbox.cfg -- /usr/bin/python3 -Su /examples/hello.py `
